@@ -86,7 +86,6 @@ static PyObject * platec_get_heightmap(PyObject *self, PyObject *args)
     size_t height = lithosphere_getMapHeight(litho);
 
     PyObject* res =  makelist(hm,width*height);
-    Py_INCREF(res);
     return res;
 }
 
@@ -102,7 +101,6 @@ static PyObject * platec_get_platesmap(PyObject *self, PyObject *args)
     size_t height = lithosphere_getMapHeight(litho);
 
     PyObject* res =  makelist_int(hm,width*height);
-    Py_INCREF(res);
     return res;
 }
 
