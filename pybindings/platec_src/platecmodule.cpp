@@ -14,7 +14,7 @@ typedef INT32 int32_t;
 #include <stdint.h>
 #endif
 
-static PyObject * platec_create(PyObject *self, PyObject *args)
+static PyObject * platec_create(PyObject *self, PyObject *args, PyObject *keywds)
 {
     unsigned int seed;
     unsigned int width;
@@ -26,8 +26,12 @@ static PyObject * platec_create(PyObject *self, PyObject *args)
     float aggr_overlap_rel;
     unsigned int cycle_count;
     unsigned int num_plates;
-    if (!PyArg_ParseTuple(args, "IIIfIfIfII", &seed, &width, &height, &sea_level, &erosion_period,
-                          &folding_ratio, &aggr_overlap_abs, &aggr_overlap_rel,
+    
+    static char *kwlist[] = {"seed", "width", "height", "sea_level", "erosion_period", "folding_ratio", 
+                          "aggr_overlap_abs", "aggr_overlap_rel", "cycle_count", "num_plates", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "IIIfIfIfII", kwlist, &seed, &width, &height, &sea_level, 
+                          &erosion_period, &folding_ratio, &aggr_overlap_abs, &aggr_overlap_rel,
                           &cycle_count, &num_plates))
         return NULL;
     srand(seed);
@@ -115,7 +119,7 @@ static PyObject * platec_is_finished(PyObject *self, PyObject *args)
 }
 
 static PyMethodDef PlatecMethods[] = {
-    {   "create",  platec_create, METH_VARARGS,
+    {   "create",  (PyCFunction)platec_create, METH_VARARGS | METH_KEYWORDS,
         "Create initial plates configuration."
     },
     {   "destroy",  platec_destroy, METH_VARARGS,

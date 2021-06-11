@@ -6,28 +6,20 @@ from matplotlib import pyplot as plt
 import matplotlib.animation as animation
 
 
-seed = 3
 width = 512
 height = 512
-sea_level = 0.65
-erosion_period = 30
-folding_ratio = 0.02
-aggr_overlap_abs = 1000000
-aggr_overlap_rel = 0.33
-cycle_count = 6
-num_plates = 6
 
 p = platec.create(
-    seed,
-    width,
-    height,
-    sea_level,
-    erosion_period,
-    folding_ratio,
-    aggr_overlap_abs,
-    aggr_overlap_rel,
-    cycle_count,
-    num_plates,
+    seed=3,
+    width=width,
+    height=height,
+    sea_level=0.65,
+    erosion_period=30,
+    folding_ratio=0.02,
+    aggr_overlap_abs=1000000,
+    aggr_overlap_rel=0.33,
+    cycle_count=4,
+    num_plates=10,
 )
 
 def platec_iter():
